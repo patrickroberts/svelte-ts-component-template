@@ -30,11 +30,6 @@ export default [
       },
     ],
     plugins: [
-      resolve({
-        dedupe: [
-          'svelte',
-        ],
-      }),
       commonjs(),
       typescript(),
       svelte({
@@ -43,6 +38,11 @@ export default [
           css.write('dist/index.css', production);
         },
         preprocess: autoPreprocess(),
+      }),
+      resolve({
+        dedupe: [
+          'svelte',
+        ],
       }),
       production && terser(),
     ],
