@@ -13,41 +13,39 @@ const name = pkg.name
   .replace(/^\w/, m => m.toUpperCase())
   .replace(/-\w/g, m => m[1].toUpperCase());
 
-export default [
-  {
-    input: 'src/index.ts',
-    output: [
-      {
-        file: pkg.module,
-        format: 'es',
-        sourcemap: production,
-      },
-      {
-        file: pkg.main,
-        format: 'umd',
-        name,
-        sourcemap: production,
-      },
-    ],
-    plugins: [
-      commonjs(),
-      typescript(),
-      svelte({
-        dev: !production,
-        css: css => {
-          css.write('dist/index.css', production);
-        },
-        preprocess: autoPreprocess(),
-      }),
-      resolve({
-        dedupe: [
-          'svelte',
-        ],
-      }),
-      production && terser(),
-    ],
-    watch: {
-      clearScreen: false,
+export default {
+  input: 'src/index.ts',
+  output: [
+    {
+      file: pkg.module,
+      format: 'es',
+      sourcemap: production,
     },
+    {
+      file: pkg.main,
+      format: 'umd',
+      name,
+      sourcemap: production,
+    },
+  ],
+  plugins: [
+    commonjs(),
+    typescript(),
+    svelte({
+      dev: !production,
+      css: css => {
+        css.write('dist/index.css', production);
+      },
+      preprocess: autoPreprocess(),
+    }),
+    resolve({
+      dedupe: [
+        'svelte',
+      ],
+    }),
+    production && terser(),
+  ],
+  watch: {
+    clearScreen: false,
   },
-];
+};
