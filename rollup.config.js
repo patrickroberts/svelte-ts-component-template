@@ -33,9 +33,6 @@ export default {
     typescript(),
     svelte({
       dev: !production,
-      css: css => {
-        css.write('dist/index.css', production);
-      },
       preprocess: autoPreprocess(),
     }),
     resolve({
